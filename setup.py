@@ -3,7 +3,7 @@ import setuptools
 with open("README.md", "r", encoding="utf-8") as f:
     long_description = f.read()
 
-__version__ = "1.0.0"  # Set a version aligned with semantic versioning
+__version__ = "1.0.0"  # Semantic versioning for the package
 
 REPO_NAME = "MLproject-with-MLflow-and-AWSEC2"
 AUTHOR_USER_NAME = "Aakash091-dark"
@@ -30,22 +30,26 @@ setuptools.setup(
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries",
-        "Programming Language :: Python :: 3.10",  # Updated to latest stable version
+        "Programming Language :: Python :: 3.10",  # Python 3.10 or newer
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.10",  # Specify Python 3.10 as minimum requirement
+    python_requires=">=3.10",  # Minimum Python version
     install_requires=[
-        "mlflow>=2.6.0",  # Latest MLflow version
-        "boto3>=1.28.0",  # AWS SDK for Python
-        "scikit-learn>=1.3.0",  # ML library
-        "pandas>=2.0.0",  # Data manipulation library
-        "numpy>=1.25.0",  # Numerical computations
+        "mlflow>=2.6.0, <3.0.0",  # Ensure compatibility with other ML libraries
+        "boto3>=1.28.0, <2.0.0",  # AWS SDK
+        "scikit-learn>=1.3.0, <2.0.0",  # Machine learning
+        "pandas>=2.0.0, <3.0.0",  # Data manipulation
+        "numpy>=1.25.0, <2.0.0",  # Numerical computations
     ],
     extras_require={
-        "dev": ["pytest>=7.0", "black>=23.0", "flake8>=6.0"],  # Development dependencies
+        "dev": [
+            "pytest>=7.4.0, <8.0.0",  # Testing framework
+            "black>=23.7.0, <24.0.0",  # Code formatting
+            "flake8>=6.1.0, <7.0.0",  # Linting
+        ],
     },
-    include_package_data=True,  # Include non-code files like README.md
+    include_package_data=True,  # Include additional files (e.g., README.md)
     license="MIT",
     keywords="machine learning MLflow AWS EC2 Python package",
 )
