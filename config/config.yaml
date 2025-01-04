@@ -1,0 +1,8 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifcats/data_ingestion
+  source_URL: https://github.com/Aakash091-dark/Branching_project/blob/main/winequality-red.zip
+  local_data_file: artifacts/data_ingestion/data.zip
+  unzip_dir: artifacts/data_ingestion
+  
