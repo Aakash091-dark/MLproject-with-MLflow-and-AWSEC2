@@ -152,7 +152,11 @@ For more details, refer to the [MLflow Documentation](https://mlflow.org/docs/la
 Upload your images to the following placeholders:
 
 1. **MLflow Experiment UI Screenshot**
-   ![Upload your image here](./assets/mlflow_ui.png)
+![Screenshot 2025-01-04 154206](https://github.com/user-attachments/assets/de9c55d8-8854-436c-a5ec-a86420b3dc22)
+![Screenshot 2025-01-04 154324](https://github.com/user-attachments/assets/891dce53-df1e-46fc-bd48-2f131ba2a2df)
+![Screenshot 2025-01-04 154335](https://github.com/user-attachments/assets/82bcd3dc-5748-4590-9244-7896bf6ca358)
+
+
 
 Place your images in the `assets` folder and replace the placeholders above with the correct file paths.
 
