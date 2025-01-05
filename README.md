@@ -1,168 +1,167 @@
-# End-to-end-Machine-Learning-Project-with-MLflow
+# End-to-End Machine Learning Project with MLflow
 
+This repository contains an end-to-end machine learning project implementation leveraging MLflow for experiment tracking, model management, and deployment workflows. It also includes AWS CI/CD deployment using GitHub Actions.
 
 ## Workflows
 
-1. Update config.yaml
-2. Update schema.yaml
-3. Update params.yaml
-4. Update the entity
-5. Update the configuration manager in src config
+1. Update `config.yaml`
+2. Update `schema.yaml`
+3. Update `params.yaml`
+4. Update the `entity`
+5. Update the configuration manager in `src/config`
 6. Update the components
-7. Update the pipeline 
-8. Update the main.py
-9. Update the app.py
+7. Update the pipeline
+8. Update the `main.py`
+9. Update the `app.py`
 
+---
 
+## How to Run the Project
 
-# How to run?
-### STEPS:
+### Steps
 
-Clone the repository
+1. **Clone the Repository**
+
+    ```bash
+    git clone <repository-url>
+    cd <repository-directory>
+    ```
+
+2. **Create a Conda Environment**
+
+    ```bash
+    conda create -n mlproj python=3.8 -y
+    conda activate mlproj
+    ```
+
+3. **Install the Requirements**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Run the Application**
+
+    ```bash
+    python app.py
+    ```
+
+5. **Access the Application**
+
+    Open your browser and navigate to `http://localhost:<PORT>` to access the application.
+
+---
+
+## MLflow Integration
+
+MLflow is used for tracking experiments, logging metrics, and managing model deployments.
+
+### Launch MLflow UI Locally
 
 ```bash
-
+mlflow ui
 ```
-### STEP 01- Create a conda environment after opening the repository
+
+Access the MLflow UI at `http://localhost:5000`.
+
+### DAGsHub Integration
+
+Use DAGsHub for centralized experiment tracking with MLflow.
+
+**Run the following commands to set up environment variables:**
 
 ```bash
-conda create -n mlproj python=3.8 -y
-```
-
-```bash
-conda activate mlproj
-```
-
-
-### STEP 02- install the requirements
-```bash
-pip install -r requirements.txt
-```
-
-
-```bash
-# Finally run the following command
-python app.py
-```
-
-Now,
-```bash
-open up you local host and port
-```
-
-
-
-## MLflow
-
-[Documentation](https://mlflow.org/docs/latest/index.html)
-
-
-##### cmd
-- mlflow ui
-
-### dagshub
-[dagshub](https://dagshub.com/)
-
-MLFLOW_TRACKING_URI=https://dagshub.com/entbappy/End-to-end-Machine-Learning-Project-with-MLflow.mlflow \
-MLFLOW_TRACKING_USERNAME=entbappy \
-MLFLOW_TRACKING_PASSWORD=6824692c47a369aa6f9eac5b10041d5c8edbcef0 \
-python script.py
-
-Run this to export as env variables:
-
-```bash
-
 export MLFLOW_TRACKING_URI=https://dagshub.com/entbappy/End-to-end-Machine-Learning-Project-with-MLflow.mlflow
-
-export MLFLOW_TRACKING_USERNAME=entbappy 
-
+export MLFLOW_TRACKING_USERNAME=entbappy
 export MLFLOW_TRACKING_PASSWORD=6824692c47a369aa6f9eac5b10041d5c8edbcef0
-
 ```
 
+Run the script:
 
+```bash
+python script.py
+```
 
-# AWS-CICD-Deployment-with-Github-Actions
+For more details, refer to the [MLflow Documentation](https://mlflow.org/docs/latest/index.html).
 
-## 1. Login to AWS console.
+---
 
-## 2. Create IAM user for deployment
+## AWS CI/CD Deployment with GitHub Actions
 
-	#with specific access
+### Steps
 
-	1. EC2 access : It is virtual machine
+1. **Login to AWS Console**
 
-	2. ECR: Elastic Container registry to save your docker image in aws
+2. **Create IAM User for Deployment**
+   - Grant specific access:
+     - **EC2 Access**: For virtual machine hosting.
+     - **ECR Access**: To store Docker images.
+   - Attach policies:
+     - `AmazonEC2ContainerRegistryFullAccess`
+     - `AmazonEC2FullAccess`
 
+3. **Create ECR Repository**
+   - Repository URI: `566373416292.dkr.ecr.ap-south-1.amazonaws.com/mlproj`
 
-	#Description: About the deployment
+4. **Launch EC2 Instance**
+   - Use Ubuntu as the operating system.
 
-	1. Build docker image of the source code
+5. **Install Docker on EC2**
 
-	2. Push your docker image to ECR
+    ```bash
+    sudo apt-get update -y
+    sudo apt-get upgrade -y
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sudo sh get-docker.sh
+    sudo usermod -aG docker ubuntu
+    newgrp docker
+    ```
 
-	3. Launch Your EC2 
+6. **Configure EC2 as a Self-Hosted Runner**
+   - Go to GitHub > Repository > Settings > Actions > Runners > New Self-Hosted Runner.
+   - Follow the commands provided for your operating system.
 
-	4. Pull Your image from ECR in EC2
+7. **Setup GitHub Secrets**
 
-	5. Lauch your docker image in EC2
+    ```plaintext
+    AWS_ACCESS_KEY_ID=<your-access-key>
+    AWS_SECRET_ACCESS_KEY=<your-secret-key>
+    AWS_REGION=us-east-1
+    AWS_ECR_LOGIN_URI=566373416292.dkr.ecr.ap-south-1.amazonaws.com
+    ECR_REPOSITORY_NAME=mlproj
+    ```
 
-	#Policy:
+8. **Deployment Workflow**
+   - Build Docker image from the source code.
+   - Push the Docker image to ECR.
+   - Pull the image from ECR in EC2.
+   - Launch the application from the Docker container in EC2.
 
-	1. AmazonEC2ContainerRegistryFullAccess
+---
 
-	2. AmazonEC2FullAccess
+## About MLflow
 
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 566373416292.dkr.ecr.ap-south-1.amazonaws.com/mlproj
+- **Production Grade**: Suitable for real-world deployments.
+- **Experiment Tracking**: Logs metrics, parameters, and outputs.
+- **Model Management**: Facilitates model tagging and deployment.
 
-	
-## 4. Create EC2 machine (Ubuntu) 
+---
 
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
+## Adding Images
 
-	sudo apt-get update -y
+Upload your images to the following placeholders:
 
-	sudo apt-get upgrade
-	
-	#required
+1. **MLflow Experiment UI Screenshot**
+   ![Upload your image here](./assets/mlflow_ui.png)
 
-	curl -fsSL https://get.docker.com -o get-docker.sh
+Place your images in the `assets` folder and replace the placeholders above with the correct file paths.
 
-	sudo sh get-docker.sh
+---
 
-	sudo usermod -aG docker ubuntu
+### Resources
 
-	newgrp docker
-	
-# 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
-
-
-# 7. Setup github secrets:
-
-    AWS_ACCESS_KEY_ID=
-
-    AWS_SECRET_ACCESS_KEY=
-
-    AWS_REGION = us-east-1
-
-    AWS_ECR_LOGIN_URI = demo>>  566373416292.dkr.ecr.ap-south-1.amazonaws.com
-
-    ECR_REPOSITORY_NAME = simple-app
-
-
-
-
-## About MLflow 
-MLflow
-
- - Its Production Grade
- - Trace all of your expriements
- - Logging & tagging your model
-
-
+- [MLflow Documentation](https://mlflow.org/docs/latest/index.html)
+- [DAGsHub Documentation](https://dagshub.com/)
+- [AWS EC2 Documentation](https://aws.amazon.com/ec2/)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- https://youtu.be/pxk1Fr33-L4?si=LwUBQ2OlDH2cwwX6
